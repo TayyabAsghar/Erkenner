@@ -1,0 +1,7 @@
+#Thu Dec 17 11:20:50 PKT 2020
+base.0=D\:\\Semester_5\\Project\\erkenner1\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
+path.1=classes.dex
+renamed.1=classes2.dex
+path.0=classes.dex
+renamed.0=classes.dex
+base.1=D\:\\Semester_5\\Project\\erkenner\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
