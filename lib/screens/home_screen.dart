@@ -41,8 +41,73 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.only(right: 20),
                 onPressed: () {}),
           ]),
-      drawer: Drawer(
-        child: Text('Hello World'),
+      drawer: Padding(
+        padding: const EdgeInsets.fromLTRB(0.0, 80.0, 0.0, 0.0),
+        child: Drawer(
+          backgroundColor: Color(0xff01A7E1),
+          // Add a ListView to the drawer. This ensures the user can scroll
+          // through the options in the drawer if there isn't enough vertical
+          // space to fit everything.
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              ListTile(
+                title: Text('Home'),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (BuildContext context) => new HomePage()));
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                },
+              ),
+              ListTile(
+                title: Text('History'),
+                onTap: () {
+                  /* Navigator.of(context).pop();
+                  Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (BuildContext context) => new HistoryPage())); */
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                },
+              ),
+              ListTile(
+                title: Text('About us'),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (BuildContext context) => new AboutPage()));
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                },
+              ),
+              ListTile(
+                title: Text('Settings'),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              new PreferenceSelection()));
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                },
+              ),
+            ],
+          ),
+        ),
       ),
       body: Center(
         child: Column(
