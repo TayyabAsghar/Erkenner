@@ -5,8 +5,10 @@ import 'package:hive/hive.dart';
 
 class ThemeProvider with ChangeNotifier {
   bool isLightTheme;
+  int fontSize;
 
   ThemeProvider({this.isLightTheme});
+  //ThemeProvider({this.fontSize});
 
   ThemeData light = ThemeData.light().copyWith(
     visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -33,12 +35,13 @@ class ThemeProvider with ChangeNotifier {
   );
 
   ThemeData get getTheme {
-    getCurrentStatusNavigationBarColor(); // to manage the status bar color when app opens each time.
+    // Setting the Status/Navigation Bar color for every time app is open.
+    applyStatusNavigationBarColor();
     return isLightTheme ? light : dark;
   }
 
   // the code below is to manage the status bar color when the theme changes
-  getCurrentStatusNavigationBarColor() {
+  applyStatusNavigationBarColor() {
     if (isLightTheme)
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -58,10 +61,20 @@ class ThemeProvider with ChangeNotifier {
   }
 
   toggleThemeData() async {
-    final settings = await Hive.openBox('settings');
+    final settings =
+        await Hive.openBox('settings'); // Storing the data on local device
     settings.put('isLightTheme', !isLightTheme);
     isLightTheme = !isLightTheme;
-    getCurrentStatusNavigationBarColor();
+    applyStatusNavigationBarColor();
+    notifyListeners();
+  }
+
+  toggleThemeFontSize() async {
+    final settings =
+        await Hive.openBox('settings'); // Storing the data on local device
+    settings.put('fontSize', !isLightTheme);
+    isLightTheme = !isLightTheme;
+    applyStatusNavigationBarColor();
     notifyListeners();
   }
 }

@@ -28,23 +28,24 @@ class _SettingsState extends State<Settings> {
 
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         centerTitle: true,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
-            size: 30,
+            size: 26,
           ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: () => Navigator.pop(context),
         ),
         title: Text("Settings"),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.camera_alt),
-            color: Colors.white,
-            iconSize: 26,
+            icon: Icon(
+              Icons.camera_alt,
+              color: Colors.white,
+              size: 26,
+            ),
             alignment: Alignment.centerRight,
             padding: EdgeInsets.only(right: 20),
             onPressed: () {
@@ -107,7 +108,7 @@ class _SettingsState extends State<Settings> {
                 Text(
                   'M',
                   style: TextStyle(
-                    fontSize: 16.0,
+                    fontSize: 18.0,
                     color: Colors.white,
                   ),
                 ),
@@ -119,7 +120,7 @@ class _SettingsState extends State<Settings> {
                 Text(
                   'L',
                   style: TextStyle(
-                    fontSize: 16.0,
+                    fontSize: 20.0,
                     color: Colors.white,
                   ),
                 ),

@@ -24,9 +24,7 @@ class _ScanState extends State<Scan> {
   Widget build(BuildContext context) {
     _getCamera();
     return Scaffold(
-      body: TakePictureScreen(
-        firstCamera: firstCamera,
-      ),
+      body: TakePictureScreen(firstCamera: firstCamera),
     );
   }
 }
@@ -55,8 +53,8 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
 
   @override
   void dispose() {
-    // Dispose of the controller when the widget is disposed.
-    _cameraController.dispose();
+    _cameraController
+        .dispose(); // Dispose the controller when widget is disposed.
     super.dispose();
   }
 
@@ -64,29 +62,25 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         centerTitle: true,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
-            size: 30,
+            size: 26,
           ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: () => Navigator.pop(context),
         ),
         title: Text('Scan Images'),
       ),
       body: FutureBuilder<void>(
         future: _initializeControllerFuture,
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.connectionState == ConnectionState.done)
             return CameraPreview(_cameraController);
-          } else {
-            return Center(
-              child: Text("Failed"),
-            );
-          }
+          else
+            return Center(child: Text("Failed"));
         },
       ),
       floatingActionButton: FloatingActionButton(

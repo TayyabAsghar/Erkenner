@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:erkenner/screens/home.dart';
 import 'package:erkenner/screens/scan.dart';
-import 'package:erkenner/screens/about.dart';
-import 'package:erkenner/screens/settings.dart';
-import 'package:erkenner/screens/history.dart';
-import 'package:path_provider/path_provider.dart' as pathProvider;
 import 'package:erkenner/models/theme.dart';
+import 'package:erkenner/screens/about.dart';
+import 'package:erkenner/screens/history.dart';
+import 'package:erkenner/screens/settings.dart';
+import 'package:path_provider/path_provider.dart' as pathProvider;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,28 +21,11 @@ void main() async {
 
   runApp(ChangeNotifierProvider(
     create: (_) => ThemeProvider(isLightTheme: isLightTheme),
-    child: AppStart(),
+    child: Erkenner(),
   ));
 }
 
-// to ensure we have the themeProvider before the app starts lets make a few more changes.
-
-class AppStart extends StatelessWidget {
-  const AppStart({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
-    return Erkenner(
-      themeProvider: themeProvider,
-    );
-  }
-}
-
-class Erkenner extends StatefulWidget with WidgetsBindingObserver {
-  final themeProvider;
-
-  const Erkenner({Key key, @required this.themeProvider}) : super(key: key);
+class Erkenner extends StatefulWidget {
   @override
   _ErkennerState createState() => _ErkennerState();
 }
@@ -51,7 +34,8 @@ class _ErkennerState extends State<Erkenner> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: themeProvider.getTheme,

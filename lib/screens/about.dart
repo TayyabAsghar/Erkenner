@@ -15,13 +15,10 @@ class _AboutState extends State<About> {
             icon: Icon(
               Icons.arrow_back,
               color: Colors.white,
-              size: 30,
+              size: 26,
             ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
+            onPressed: () => Navigator.pop(context),
           ),
-          //automaticallyImplyLeading: true,
           centerTitle: true,
           title: Column(
             children: <Widget>[
@@ -35,9 +32,11 @@ class _AboutState extends State<About> {
           ),
           actions: [
             IconButton(
-                icon: Icon(Icons.camera_alt),
-                color: Colors.white,
-                iconSize: 26,
+                icon: Icon(
+                  Icons.camera_alt,
+                  color: Colors.white,
+                  size: 26,
+                ),
                 alignment: Alignment.centerRight,
                 padding: EdgeInsets.only(right: 20),
                 onPressed: () {

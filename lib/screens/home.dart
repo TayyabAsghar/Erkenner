@@ -10,19 +10,24 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         centerTitle: true,
-        title: Text("Home",
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 0.6,
-                fontStyle: FontStyle.italic)),
+        title: Text(
+          "Home",
+          style: TextStyle(
+              color: Colors.white,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 0.6,
+              fontStyle: FontStyle.italic),
+        ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.camera_alt_rounded),
-            color: Colors.white,
-            iconSize: 26,
+            icon: Icon(
+              Icons.camera_alt_rounded,
+              color: Colors.white,
+              size: 26,
+            ),
             alignment: Alignment.centerRight,
             padding: EdgeInsets.only(right: 20),
             onPressed: () => Navigator.pushNamed(context, '/scan'),
@@ -40,6 +45,7 @@ class _HomeState extends State<Home> {
             padding: EdgeInsets.zero,
             children: <Widget>[
               ListTile(
+                leading: Icon(Icons.ac_unit),
                 title: Text('History'),
                 onTap: () {
                   Navigator.pop(context);
@@ -47,6 +53,7 @@ class _HomeState extends State<Home> {
                 },
               ),
               ListTile(
+                leading: Icon(Icons.ac_unit),
                 title: Text('Settings'),
                 onTap: () {
                   Navigator.pop(context);
@@ -54,6 +61,7 @@ class _HomeState extends State<Home> {
                 },
               ),
               ListTile(
+                leading: Icon(Icons.ac_unit),
                 title: Text('About us'),
                 onTap: () {
                   Navigator.pop(context);
