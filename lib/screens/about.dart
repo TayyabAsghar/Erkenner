@@ -1,29 +1,16 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(Erkenner());
-}
-
-class Erkenner extends StatelessWidget {
-  // This widget is the root of your application.
+class About extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: AboutPage());
-  }
+  _AboutState createState() => _AboutState();
 }
 
-class AboutPage extends StatefulWidget {
-  @override
-  _AboutPageState createState() => _AboutPageState();
-}
-
-class _AboutPageState extends State<AboutPage> {
+class _AboutState extends State<About> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff0E1B2B),
       appBar: AppBar(
+          elevation: 0,
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
@@ -31,9 +18,10 @@ class _AboutPageState extends State<AboutPage> {
               size: 30,
             ),
             onPressed: () {
-              // TODO: On press
+              Navigator.pop(context);
             },
           ),
+          //automaticallyImplyLeading: true,
           centerTitle: true,
           title: Column(
             children: <Widget>[
@@ -49,10 +37,13 @@ class _AboutPageState extends State<AboutPage> {
             IconButton(
                 icon: Icon(Icons.camera_alt),
                 color: Colors.white,
-                iconSize: 30,
+                iconSize: 26,
                 alignment: Alignment.centerRight,
                 padding: EdgeInsets.only(right: 20),
-                onPressed: () {}),
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/scan');
+                }),
           ]),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

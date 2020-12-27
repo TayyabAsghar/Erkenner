@@ -1,220 +1,178 @@
+import 'package:erkenner/models/theme.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 
-void main() => runApp(Erkenner());
-
-class Erkenner extends StatelessWidget {
+class Settings extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Settings',
-      home: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-              size: 30,
-            ),
-            onPressed: () {
-              // TODO: On press
-            },
-          ),
-          title: Column(
-            children: <Widget>[
-              Align(
-                alignment: Alignment.center,
-                child: Container(
-                  child: Text("Settings"),
-                ),
-              ),
-            ],
-          ),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.camera_alt,
-                color: Colors.white,
-                size: 30,
-              ),
-              onPressed: () {
-                // TODO: On press
-              },
-            ),
-          ],
-          backgroundColor: HexColor("#01A7E1"),
-        ),
-        body: PreferenceSelection(),
-        backgroundColor: HexColor("#0E1B2B"),
-      ),
-    );
-  }
+  _SettingsState createState() => _SettingsState();
 }
 
-class PreferenceSelection extends StatefulWidget {
-  PreferenceSelection({Key key}) : super(key: key);
-
-  @override
-  _PreferenceSelection createState() => _PreferenceSelection();
-}
-
-class _PreferenceSelection extends State<PreferenceSelection> {
+class _SettingsState extends State<Settings> {
   int selectedRadio;
+
   @override
   void initState() {
-    super.initState();
     selectedRadio = 2;
+    super.initState();
   }
 
-  setSelectedRadio(int val) {
-    setState(() {
-      selectedRadio = val;
-    });
-  }
+  setSelectedRadio(int val) => setState(() => selectedRadio = val);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 11.0),
+    final themeProvider = Provider.of<ThemeProvider>(
+      context,
+      listen: false,
+    );
+    bool themeState = !themeProvider.isLightTheme;
+
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: 30,
           ),
-          Text(
-            "Choose Preferences",
-            style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.white),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 8.0),
-          ),
-          Divider(height: 5.0, color: Colors.white),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-          ),
-          Row(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 8.0),
-              ),
-              Text(
-                'Font Size:',
-                style: new TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.0,
-                  color: Colors.white,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 8.0),
-              ),
-              Text(
-                'S',
-                style: TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.white,
-                ),
-              ),
-              Radio(
-                value: 1,
-                groupValue: selectedRadio,
-                onChanged: (val) {
-                  setSelectedRadio(val);
-                },
-              ),
-              Text(
-                'M',
-                style: TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.white,
-                ),
-              ),
-              Radio(
-                value: 2,
-                groupValue: selectedRadio,
-                onChanged: (val) {
-                  setSelectedRadio(val);
-                },
-              ),
-              Text(
-                'L',
-                style: TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.white,
-                ),
-              ),
-              Radio(
-                value: 3,
-                groupValue: selectedRadio,
-                onChanged: (val) {
-                  setSelectedRadio(val);
-                },
-              ),
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 18.0),
-              ),
-              Text(
-                'Dark Theme:',
-                style: new TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.0,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 80.0),
-          ),
-          Row(
-            children: <Widget>[
-              Text(
-                'We are working to add more',
-                style: new TextStyle(
-                  fontSize: 18.0,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-            mainAxisAlignment: MainAxisAlignment.center,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 1.7),
-          ),
-          Row(
-            children: <Widget>[
-              Text(
-                'setting features',
-                style: new TextStyle(
-                  fontSize: 18.0,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-            mainAxisAlignment: MainAxisAlignment.center,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 1.7),
-          ),
-          Row(
-            children: <Widget>[
-              Text(
-                'till then enjoy the experience.',
-                style: new TextStyle(
-                  fontSize: 18.0,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-            mainAxisAlignment: MainAxisAlignment.center,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text("Settings"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.camera_alt),
+            color: Colors.white,
+            iconSize: 26,
+            alignment: Alignment.centerRight,
+            padding: EdgeInsets.only(right: 20),
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/scan');
+            },
           ),
         ],
+      ),
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 11.0),
+            ),
+            Text(
+              "Choose Preferences",
+              style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 8.0),
+            ),
+            Divider(height: 5.0, color: Colors.white),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 8.0),
+            ),
+            Row(
+              children: <Widget>[
+                Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 18.0, vertical: 0.0),
+                ),
+                Text(
+                  'Font Size:',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18.0,
+                    color: Colors.white,
+                  ),
+                ),
+                Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 18.0, vertical: 0.0),
+                ),
+                Text(
+                  'S',
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.white,
+                  ),
+                ),
+                Radio(
+                  value: 1,
+                  groupValue: selectedRadio,
+                  onChanged: (val) => setSelectedRadio(val),
+                ),
+                Text(
+                  'M',
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.white,
+                  ),
+                ),
+                Radio(
+                  value: 2,
+                  groupValue: selectedRadio,
+                  onChanged: (val) => setSelectedRadio(val),
+                ),
+                Text(
+                  'L',
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.white,
+                  ),
+                ),
+                Radio(
+                  value: 3,
+                  groupValue: selectedRadio,
+                  onChanged: (val) => setSelectedRadio(val),
+                ),
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 18.0, vertical: 0.0),
+                ),
+                Text(
+                  'Dark Theme:',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18.0,
+                    color: Colors.white,
+                  ),
+                ),
+                Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 12.0, vertical: 0.0),
+                ),
+                Switch(
+                  value: themeState,
+                  onChanged: (state) => setState(() {
+                    themeState = state;
+                    themeProvider.toggleThemeData();
+                  }),
+                )
+              ],
+            ),
+            Expanded(
+              // This  box will cover all the area beneath the Dark Theme option.
+              child: Center(
+                child: Text(
+                  'We are working to add more \n setting features\n till then enjoy the experience.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    height: 1.43,
+                    fontSize: 18.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

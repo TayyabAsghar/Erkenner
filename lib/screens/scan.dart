@@ -1,60 +1,81 @@
 import 'dart:io';
+import 'dart:async';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
+import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  final cameras =
-      await availableCameras(); // returns Future<List>(CameraDescription
-  final firstCamera = cameras.first; //Camera[0]
-
-  return runApp(MyApp(firstCamera));
+class Scan extends StatefulWidget {
+  @override
+  _ScanState createState() => _ScanState();
 }
 
-class MyApp extends StatelessWidget {
-  final camera;
-  MyApp(this.camera);
+class _ScanState extends State<Scan> {
+  var firstCamera;
+
+  _getCamera() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    final cameras =
+        await availableCameras(); // returns Future<List>(CameraDescription
+    firstCamera = cameras.first; //Camera[0]
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Erkenner',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: MyHomePage(
-        title: 'Scan Images',
-        firstCamera: camera,
+    _getCamera();
+    return Scaffold(
+      body: TakePictureScreen(
+        firstCamera: firstCamera,
       ),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class TakePictureScreen extends StatefulWidget {
   final CameraDescription firstCamera;
-  final String title;
 
-  MyHomePage({Key key, this.title, this.firstCamera}) : super(key: key);
+  TakePictureScreen({Key key, this.firstCamera}) : super(key: key);
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _TakePictureScreenState createState() => _TakePictureScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _TakePictureScreenState extends State<TakePictureScreen> {
   CameraController _cameraController;
   Future<void> _initializeControllerFuture;
-  int _counter;
 
   @override
   initState() {
-    _cameraController =
-        CameraController(widget.firstCamera, ResolutionPreset.veryHigh);
+    super.initState();
+    _cameraController = CameraController(
+      widget.firstCamera,
+      ResolutionPreset.veryHigh,
+    );
     _initializeControllerFuture = _cameraController.initialize();
+  }
+
+  @override
+  void dispose() {
+    // Dispose of the controller when the widget is disposed.
+    _cameraController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        centerTitle: true,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: 30,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text('Scan Images'),
       ),
       body: FutureBuilder<void>(
         future: _initializeControllerFuture,
@@ -70,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         tooltip: 'Click',
-        child: Icon(Icons.camera),
+        child: Icon(Icons.camera_alt),
         onPressed: () async {
           try {
             // Create a temp path to store images
@@ -78,14 +99,18 @@ class _MyHomePageState extends State<MyHomePage> {
             final path = join(
                 (await getTemporaryDirectory()).path, '${DateTime.now()}.png');
 
-            //Use camera controller to take pictures
-            await _cameraController.takePicture(path);
+            // Use camera controller to take pictures
+            await _cameraController.takePicture(); //TODO path
 
             // Creating new class to open pictures
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => DisplayPicture(path)));
-          } catch (e) {
-            debugPrint(e);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DisplayPictureScreen(imagePath: path),
+              ),
+            );
+          } catch (error) {
+            debugPrint(error);
           }
         },
       ),
@@ -94,17 +119,17 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class DisplayPicture extends StatelessWidget {
-  final String path;
-  DisplayPicture(this.path);
+class DisplayPictureScreen extends StatelessWidget {
+  final String imagePath;
+  DisplayPictureScreen({Key key, this.imagePath}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(path),
+        title: Text(imagePath),
       ),
-      body: Image.file(File(path)),
+      body: Image.file(File(imagePath)),
     );
   }
 }

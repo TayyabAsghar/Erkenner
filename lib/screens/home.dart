@@ -1,0 +1,109 @@
+import 'package:flutter/material.dart';
+
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("Home",
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 0.6,
+                fontStyle: FontStyle.italic)),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.camera_alt_rounded),
+            color: Colors.white,
+            iconSize: 26,
+            alignment: Alignment.centerRight,
+            padding: EdgeInsets.only(right: 20),
+            onPressed: () => Navigator.pushNamed(context, '/scan'),
+          ),
+        ],
+      ),
+      drawer: Padding(
+        padding: const EdgeInsets.fromLTRB(0.0, 80.0, 130.0, 0.0),
+        child: Drawer(
+          // Add a ListView to the drawer. This ensures the user can scroll
+          // through the options in the drawer if there isn't enough vertical
+          // space to fit everything.
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              ListTile(
+                title: Text('History'),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/history');
+                },
+              ),
+              ListTile(
+                title: Text('Settings'),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/settings');
+                },
+              ),
+              ListTile(
+                title: Text('About us'),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/about');
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: 50),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    child: Text(
+                      "Hi! I am Erkenner Here to Help You Recognize all type of traffic signals...",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        wordSpacing: 6.0,
+                        letterSpacing: 0.6,
+                        color: Colors.white,
+                      ),
+                    ),
+                    width: 300,
+                  ),
+                ),
+              ],
+            ),
+            FlatButton(
+              splashColor: Colors.red,
+              onPressed: () => Navigator.pushNamed(context, '/scan'),
+              padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+              child: Text(
+                "Get Started",
+                style: TextStyle(fontSize: 20.0),
+              ),
+              color: Colors.blueAccent,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
