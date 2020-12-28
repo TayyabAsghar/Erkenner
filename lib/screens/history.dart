@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:erkenner/models/theme.dart';
 
 class History extends StatefulWidget {
   @override
@@ -8,6 +10,11 @@ class History extends StatefulWidget {
 class _HistoryState extends State<History> {
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(
+      context,
+      listen: false,
+    );
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -20,7 +27,12 @@ class _HistoryState extends State<History> {
           ),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text("History"),
+        title: Text(
+          "History",
+          style: TextStyle(
+            fontSize: themeProvider.getFontSize,
+          ),
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(

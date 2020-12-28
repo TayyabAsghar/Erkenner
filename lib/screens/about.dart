@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:erkenner/models/theme.dart';
 
 class About extends StatefulWidget {
   @override
@@ -8,6 +10,11 @@ class About extends StatefulWidget {
 class _AboutState extends State<About> {
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(
+      context,
+      listen: false,
+    );
+
     return Scaffold(
       appBar: AppBar(
           elevation: 0,
@@ -25,7 +32,10 @@ class _AboutState extends State<About> {
               Align(
                 alignment: Alignment.center,
                 child: Container(
-                  child: Text("About"),
+                  child: Text(
+                    "About",
+                    style: TextStyle(fontSize: themeProvider.getFontSize),
+                  ),
                 ),
               ),
             ],
@@ -58,7 +68,7 @@ class _AboutState extends State<About> {
                     "Hi! I am Erkenner",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: themeProvider.getFontSize,
                       fontWeight: FontWeight.bold,
                       fontFamily: "Calibri",
                       wordSpacing: 6.0,
@@ -82,7 +92,7 @@ class _AboutState extends State<About> {
                     "Here to help you recognize all types of Traffic Signals.",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: themeProvider.getFontSize,
                       fontFamily: "Calibri",
                       wordSpacing: 6.0,
                       letterSpacing: 0.6,
@@ -105,7 +115,7 @@ class _AboutState extends State<About> {
                     "How it Works?",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: themeProvider.getFontSize,
                       fontFamily: "Calibri",
                       fontWeight: FontWeight.bold,
                       wordSpacing: 6.0,

@@ -1,6 +1,6 @@
-import 'package:erkenner/models/theme.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:erkenner/models/theme.dart';
 
 class Settings extends StatefulWidget {
   @override
@@ -12,11 +12,9 @@ class _SettingsState extends State<Settings> {
 
   @override
   void initState() {
-    selectedRadio = 2;
     super.initState();
+    selectedRadio = 2;
   }
-
-  setSelectedRadio(int val) => setState(() => selectedRadio = val);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +36,10 @@ class _SettingsState extends State<Settings> {
           ),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text("Settings"),
+        title: Text(
+          "Settings",
+          style: TextStyle(fontSize: themeProvider.getFontSize),
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(
@@ -64,7 +65,7 @@ class _SettingsState extends State<Settings> {
             Text(
               "Choose Preferences",
               style: TextStyle(
-                  fontSize: 20.0,
+                  fontSize: themeProvider.getFontSize,
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
             ),
@@ -85,7 +86,7 @@ class _SettingsState extends State<Settings> {
                   'Font Size:',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 18.0,
+                    fontSize: themeProvider.getFontSize,
                     color: Colors.white,
                   ),
                 ),
@@ -103,7 +104,10 @@ class _SettingsState extends State<Settings> {
                 Radio(
                   value: 1,
                   groupValue: selectedRadio,
-                  onChanged: (val) => setSelectedRadio(val),
+                  onChanged: (val) {
+                    themeProvider.setFontSize(14);
+                    setState(() => selectedRadio = val);
+                  },
                 ),
                 Text(
                   'M',
@@ -115,7 +119,10 @@ class _SettingsState extends State<Settings> {
                 Radio(
                   value: 2,
                   groupValue: selectedRadio,
-                  onChanged: (val) => setSelectedRadio(val),
+                  onChanged: (val) {
+                    themeProvider.setFontSize(16);
+                    setState(() => selectedRadio = val);
+                  },
                 ),
                 Text(
                   'L',
@@ -127,7 +134,10 @@ class _SettingsState extends State<Settings> {
                 Radio(
                   value: 3,
                   groupValue: selectedRadio,
-                  onChanged: (val) => setSelectedRadio(val),
+                  onChanged: (val) {
+                    themeProvider.setFontSize(22);
+                    setState(() => selectedRadio = val);
+                  },
                 ),
               ],
             ),
@@ -141,7 +151,7 @@ class _SettingsState extends State<Settings> {
                   'Dark Theme:',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 18.0,
+                    fontSize: themeProvider.getFontSize,
                     color: Colors.white,
                   ),
                 ),
@@ -151,22 +161,19 @@ class _SettingsState extends State<Settings> {
                 ),
                 Switch(
                   value: themeState,
-                  onChanged: (state) => setState(() {
-                    themeState = state;
-                    themeProvider.toggleThemeData();
-                  }),
-                )
+                  onChanged: (state) => themeProvider.toggleThemeData(),
+                ),
               ],
             ),
             Expanded(
               // This  box will cover all the area beneath the Dark Theme option.
               child: Center(
                 child: Text(
-                  'We are working to add more \n setting features\n till then enjoy the experience.',
+                  'We are working to add more\n setting features\n till then enjoy the experience.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     height: 1.43,
-                    fontSize: 18.0,
+                    fontSize: themeProvider.getFontSize,
                     color: Colors.white,
                   ),
                 ),

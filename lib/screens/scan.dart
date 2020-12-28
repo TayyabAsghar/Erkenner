@@ -2,7 +2,9 @@ import 'dart:io';
 import 'dart:async';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:path/path.dart' show join;
+import 'package:erkenner/models/theme.dart';
 import 'package:path_provider/path_provider.dart';
 
 class Scan extends StatefulWidget {
@@ -60,6 +62,11 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(
+      context,
+      listen: false,
+    );
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -72,7 +79,12 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
           ),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text('Scan Images'),
+        title: Text(
+          'Scan Images',
+          style: TextStyle(
+            fontSize: themeProvider.getFontSize,
+          ),
+        ),
       ),
       body: FutureBuilder<void>(
         future: _initializeControllerFuture,
@@ -80,7 +92,15 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
           if (snapshot.connectionState == ConnectionState.done)
             return CameraPreview(_cameraController);
           else
-            return Center(child: Text("Failed"));
+            return Center(
+              child: Text(
+                'Failed',
+                style: TextStyle(
+                  fontSize: themeProvider.getFontSize,
+                  color: Colors.red[900],
+                ),
+              ),
+            );
         },
       ),
       floatingActionButton: FloatingActionButton(

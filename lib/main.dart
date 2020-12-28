@@ -18,11 +18,17 @@ void main() async {
 
   final settings = await Hive.openBox('settings');
   bool isLightTheme = settings.get('isLightTheme') ?? false;
+  double fontSize = settings.get('fontSize');
 
-  runApp(ChangeNotifierProvider(
-    create: (_) => ThemeProvider(isLightTheme: isLightTheme),
-    child: Erkenner(),
-  ));
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(
+        isLightTheme: isLightTheme,
+        fontSize: fontSize,
+      ),
+      child: Erkenner(),
+    ),
+  );
 }
 
 class Erkenner extends StatefulWidget {

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:erkenner/models/theme.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -8,6 +10,10 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(
+      context,
+      listen: false,
+    );
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -16,7 +22,7 @@ class _HomeState extends State<Home> {
           "Home",
           style: TextStyle(
               color: Colors.white,
-              fontSize: 24,
+              fontSize: themeProvider.getFontSize,
               fontWeight: FontWeight.bold,
               letterSpacing: 0.6,
               fontStyle: FontStyle.italic),
@@ -45,7 +51,7 @@ class _HomeState extends State<Home> {
             padding: EdgeInsets.zero,
             children: <Widget>[
               ListTile(
-                leading: Icon(Icons.ac_unit),
+                leading: Icon(Icons.history),
                 title: Text('History'),
                 onTap: () {
                   Navigator.pop(context);
@@ -53,7 +59,7 @@ class _HomeState extends State<Home> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.ac_unit),
+                leading: Icon(Icons.settings),
                 title: Text('Settings'),
                 onTap: () {
                   Navigator.pop(context);
@@ -61,7 +67,7 @@ class _HomeState extends State<Home> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.ac_unit),
+                leading: Icon(Icons.supervised_user_circle),
                 title: Text('About us'),
                 onTap: () {
                   Navigator.pop(context);
@@ -87,7 +93,7 @@ class _HomeState extends State<Home> {
                       "Hi! I am Erkenner Here to Help You Recognize all type of traffic signals...",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: themeProvider.getFontSize,
                         fontWeight: FontWeight.bold,
                         wordSpacing: 6.0,
                         letterSpacing: 0.6,
@@ -105,7 +111,7 @@ class _HomeState extends State<Home> {
               padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
               child: Text(
                 "Get Started",
-                style: TextStyle(fontSize: 20.0),
+                style: TextStyle(fontSize: themeProvider.getFontSize),
               ),
               color: Colors.blueAccent,
             ),
