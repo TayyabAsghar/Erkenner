@@ -4,22 +4,22 @@ import 'package:erkenner/models/theme.dart';
 
 class Settings extends StatelessWidget {
   final double fontSize;
-  final small = 14.0;
-  final medium = 16.0;
-  final large = 22.0;
+  final smallFonts = 14.0;
+  final mediumFonts = 16.0;
+  final largeFonts = 22.0;
 
   Settings({@required this.fontSize});
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   selectedRadio = 2;
-  // }
-
   int selectedRadio() {
-    if (fontSize == small) return 1;
-    if (fontSize == medium) return 2;
+    if (fontSize == smallFonts) return 1;
+    if (fontSize == mediumFonts) return 2;
     return 3;
+  }
+
+  double getScale() {
+    if (fontSize == smallFonts) return 0.9;
+    if (fontSize == mediumFonts) return 1.1;
+    return 1.2;
   }
 
   @override
@@ -104,38 +104,47 @@ class Settings extends StatelessWidget {
                 Text(
                   'S',
                   style: TextStyle(
-                    fontSize: 16.0,
+                    fontSize: smallFonts,
                     color: Colors.white,
                   ),
                 ),
-                Radio(
-                  value: 1,
-                  groupValue: selectedRadio(),
-                  onChanged: (val) => themeProvider.setFontSize(small),
+                Transform.scale(
+                  scale: 0.8,
+                  child: Radio(
+                    value: 1,
+                    groupValue: selectedRadio(),
+                    onChanged: (val) => themeProvider.setFontSize(smallFonts),
+                  ),
                 ),
                 Text(
                   'M',
                   style: TextStyle(
-                    fontSize: 18.0,
+                    fontSize: mediumFonts,
                     color: Colors.white,
                   ),
                 ),
-                Radio(
-                  value: 2,
-                  groupValue: selectedRadio(),
-                  onChanged: (val) => themeProvider.setFontSize(medium),
+                Transform.scale(
+                  scale: 0.92,
+                  child: Radio(
+                    value: 2,
+                    groupValue: selectedRadio(),
+                    onChanged: (val) => themeProvider.setFontSize(mediumFonts),
+                  ),
                 ),
                 Text(
                   'L',
                   style: TextStyle(
-                    fontSize: 20.0,
+                    fontSize: largeFonts,
                     color: Colors.white,
                   ),
                 ),
-                Radio(
-                  value: 3,
-                  groupValue: selectedRadio(),
-                  onChanged: (val) => themeProvider.setFontSize(large),
+                Transform.scale(
+                  scale: 1.05,
+                  child: Radio(
+                    value: 3,
+                    groupValue: selectedRadio(),
+                    onChanged: (val) => themeProvider.setFontSize(largeFonts),
+                  ),
                 ),
               ],
             ),
@@ -157,9 +166,12 @@ class Settings extends StatelessWidget {
                   padding:
                       EdgeInsets.symmetric(horizontal: 12.0, vertical: 0.0),
                 ),
-                Switch(
-                  value: themeState,
-                  onChanged: (state) => themeProvider.toggleThemeData(),
+                Transform.scale(
+                  scale: getScale(), // Scale changes with the change of Fonts.
+                  child: Switch(
+                    value: themeState,
+                    onChanged: (state) => themeProvider.toggleThemeData(),
+                  ),
                 ),
               ],
             ),
