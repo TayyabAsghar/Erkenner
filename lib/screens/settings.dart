@@ -66,9 +66,7 @@ class Settings extends StatelessWidget {
       body: Container(
         child: Column(
           children: <Widget>[
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 11.0),
-            ),
+            Padding(padding: EdgeInsets.symmetric(vertical: 11.0)),
             Text(
               "Choose Preferences",
               style: TextStyle(
@@ -76,19 +74,15 @@ class Settings extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 8.0),
+            Padding(padding: EdgeInsets.symmetric(vertical: 8.0)),
+            Divider(
+              height: 5.0,
+              color: Colors.white,
             ),
-            Divider(height: 5.0, color: Colors.white),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 8.0),
-            ),
+            Padding(padding: EdgeInsets.symmetric(vertical: 8.0)),
             Row(
               children: <Widget>[
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 18.0, vertical: 0.0),
-                ),
+                Padding(padding: EdgeInsets.symmetric(horizontal: 18.0)),
                 Text(
                   'Font Size:',
                   style: TextStyle(
@@ -97,10 +91,7 @@ class Settings extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 18.0, vertical: 0.0),
-                ),
+                Padding(padding: EdgeInsets.symmetric(horizontal: 18.0)),
                 Text(
                   'S',
                   style: TextStyle(
@@ -151,8 +142,7 @@ class Settings extends StatelessWidget {
             Row(
               children: <Widget>[
                 Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 18.0, vertical: 0.0),
+                  padding: EdgeInsets.symmetric(horizontal: 18.0),
                 ),
                 Text(
                   'Dark Theme:',
@@ -163,14 +153,14 @@ class Settings extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 12.0, vertical: 0.0),
-                ),
-                Transform.scale(
-                  scale: getScale(), // Scale changes with the change of Fonts.
-                  child: Switch(
-                    value: themeState,
-                    onChanged: (state) => themeProvider.toggleThemeData(),
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Transform.scale(
+                    scale:
+                        getScale(), // Scale changes with the change of Fonts.
+                    child: Switch(
+                      value: themeState,
+                      onChanged: (state) => themeProvider.toggleThemeData(),
+                    ),
                   ),
                 ),
               ],
