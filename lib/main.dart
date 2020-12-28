@@ -50,7 +50,7 @@ class _ErkennerState extends State<Erkenner> {
         '/home': (context) => Home(),
         '/scan': (context) => Scan(),
         '/history': (context) => History(),
-        '/settings': (context) => Settings(),
+        '/settings': (context) => Settings(fontSize: themeProvider.fontSize),
         '/about': (context) => About(),
       },
     );

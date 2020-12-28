@@ -10,10 +10,10 @@ class History extends StatefulWidget {
 class _HistoryState extends State<History> {
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(
+    final fontSize = Provider.of<ThemeProvider>(
       context,
       listen: false,
-    );
+    ).fontSize;
 
     return Scaffold(
       appBar: AppBar(
@@ -30,7 +30,7 @@ class _HistoryState extends State<History> {
         title: Text(
           "History",
           style: TextStyle(
-            fontSize: themeProvider.getFontSize,
+            fontSize: fontSize,
           ),
         ),
         actions: <Widget>[

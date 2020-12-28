@@ -14,6 +14,8 @@ class _HomeState extends State<Home> {
       context,
       listen: false,
     );
+    final fontSize = themeProvider.fontSize;
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -22,7 +24,7 @@ class _HomeState extends State<Home> {
           "Home",
           style: TextStyle(
               color: Colors.white,
-              fontSize: themeProvider.getFontSize,
+              fontSize: fontSize,
               fontWeight: FontWeight.bold,
               letterSpacing: 0.6,
               fontStyle: FontStyle.italic),
@@ -93,7 +95,7 @@ class _HomeState extends State<Home> {
                       "Hi! I am Erkenner Here to Help You Recognize all type of traffic signals...",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: themeProvider.getFontSize,
+                        fontSize: fontSize,
                         fontWeight: FontWeight.bold,
                         wordSpacing: 6.0,
                         letterSpacing: 0.6,
@@ -111,7 +113,7 @@ class _HomeState extends State<Home> {
               padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
               child: Text(
                 "Get Started",
-                style: TextStyle(fontSize: themeProvider.getFontSize),
+                style: TextStyle(fontSize: fontSize),
               ),
               color: Colors.blueAccent,
             ),

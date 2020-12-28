@@ -10,10 +10,10 @@ class About extends StatefulWidget {
 class _AboutState extends State<About> {
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(
+    final fontSize = Provider.of<ThemeProvider>(
       context,
       listen: false,
-    );
+    ).fontSize;
 
     return Scaffold(
       appBar: AppBar(
@@ -34,7 +34,7 @@ class _AboutState extends State<About> {
                 child: Container(
                   child: Text(
                     "About",
-                    style: TextStyle(fontSize: themeProvider.getFontSize),
+                    style: TextStyle(fontSize: fontSize),
                   ),
                 ),
               ),
@@ -68,7 +68,7 @@ class _AboutState extends State<About> {
                     "Hi! I am Erkenner",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: themeProvider.getFontSize,
+                      fontSize: fontSize,
                       fontWeight: FontWeight.bold,
                       fontFamily: "Calibri",
                       wordSpacing: 6.0,
@@ -92,7 +92,7 @@ class _AboutState extends State<About> {
                     "Here to help you recognize all types of Traffic Signals.",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: themeProvider.getFontSize,
+                      fontSize: fontSize,
                       fontFamily: "Calibri",
                       wordSpacing: 6.0,
                       letterSpacing: 0.6,
@@ -115,7 +115,7 @@ class _AboutState extends State<About> {
                     "How it Works?",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: themeProvider.getFontSize,
+                      fontSize: fontSize,
                       fontFamily: "Calibri",
                       fontWeight: FontWeight.bold,
                       wordSpacing: 6.0,

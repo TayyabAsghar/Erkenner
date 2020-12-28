@@ -62,10 +62,10 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(
+    final fontSize = Provider.of<ThemeProvider>(
       context,
       listen: false,
-    );
+    ).fontSize;
 
     return Scaffold(
       appBar: AppBar(
@@ -82,7 +82,7 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
         title: Text(
           'Scan Images',
           style: TextStyle(
-            fontSize: themeProvider.getFontSize,
+            fontSize: fontSize,
           ),
         ),
       ),
@@ -96,7 +96,7 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
               child: Text(
                 'Failed',
                 style: TextStyle(
-                  fontSize: themeProvider.getFontSize,
+                  fontSize: fontSize,
                   color: Colors.red[900],
                 ),
               ),

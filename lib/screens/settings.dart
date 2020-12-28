@@ -2,18 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:erkenner/models/theme.dart';
 
-class Settings extends StatefulWidget {
-  @override
-  _SettingsState createState() => _SettingsState();
-}
+class Settings extends StatelessWidget {
+  final double fontSize;
+  final small = 14.0;
+  final medium = 16.0;
+  final large = 22.0;
 
-class _SettingsState extends State<Settings> {
-  int selectedRadio;
+  Settings({@required this.fontSize});
 
-  @override
-  void initState() {
-    super.initState();
-    selectedRadio = 2;
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   selectedRadio = 2;
+  // }
+
+  int selectedRadio() {
+    if (fontSize == small) return 1;
+    if (fontSize == medium) return 2;
+    return 3;
   }
 
   @override
@@ -22,7 +28,8 @@ class _SettingsState extends State<Settings> {
       context,
       listen: false,
     );
-    bool themeState = !themeProvider.isLightTheme;
+    final themeState = !themeProvider.isLightTheme;
+    final fontSize = themeProvider.fontSize;
 
     return Scaffold(
       appBar: AppBar(
@@ -38,7 +45,7 @@ class _SettingsState extends State<Settings> {
         ),
         title: Text(
           "Settings",
-          style: TextStyle(fontSize: themeProvider.getFontSize),
+          style: TextStyle(fontSize: fontSize),
         ),
         actions: <Widget>[
           IconButton(
@@ -65,7 +72,7 @@ class _SettingsState extends State<Settings> {
             Text(
               "Choose Preferences",
               style: TextStyle(
-                  fontSize: themeProvider.getFontSize,
+                  fontSize: fontSize,
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
             ),
@@ -86,7 +93,7 @@ class _SettingsState extends State<Settings> {
                   'Font Size:',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: themeProvider.getFontSize,
+                    fontSize: fontSize,
                     color: Colors.white,
                   ),
                 ),
@@ -103,11 +110,8 @@ class _SettingsState extends State<Settings> {
                 ),
                 Radio(
                   value: 1,
-                  groupValue: selectedRadio,
-                  onChanged: (val) {
-                    themeProvider.setFontSize(14);
-                    setState(() => selectedRadio = val);
-                  },
+                  groupValue: selectedRadio(),
+                  onChanged: (val) => themeProvider.setFontSize(small),
                 ),
                 Text(
                   'M',
@@ -118,11 +122,8 @@ class _SettingsState extends State<Settings> {
                 ),
                 Radio(
                   value: 2,
-                  groupValue: selectedRadio,
-                  onChanged: (val) {
-                    themeProvider.setFontSize(16);
-                    setState(() => selectedRadio = val);
-                  },
+                  groupValue: selectedRadio(),
+                  onChanged: (val) => themeProvider.setFontSize(medium),
                 ),
                 Text(
                   'L',
@@ -133,11 +134,8 @@ class _SettingsState extends State<Settings> {
                 ),
                 Radio(
                   value: 3,
-                  groupValue: selectedRadio,
-                  onChanged: (val) {
-                    themeProvider.setFontSize(22);
-                    setState(() => selectedRadio = val);
-                  },
+                  groupValue: selectedRadio(),
+                  onChanged: (val) => themeProvider.setFontSize(large),
                 ),
               ],
             ),
@@ -151,7 +149,7 @@ class _SettingsState extends State<Settings> {
                   'Dark Theme:',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: themeProvider.getFontSize,
+                    fontSize: fontSize,
                     color: Colors.white,
                   ),
                 ),
@@ -173,7 +171,7 @@ class _SettingsState extends State<Settings> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     height: 1.43,
-                    fontSize: themeProvider.getFontSize,
+                    fontSize: fontSize,
                     color: Colors.white,
                   ),
                 ),

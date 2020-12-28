@@ -33,8 +33,6 @@ class ThemeProvider with ChangeNotifier {
     return isLightTheme ? light : dark;
   }
 
-  double get getFontSize => fontSize;
-
   // the code below is to manage the status bar color when the theme changes
   applyStatusNavigationBarColor() {
     if (isLightTheme)
