@@ -14,7 +14,7 @@ class _HomeState extends State<Home> {
       context,
       listen: false,
     ).fontSize;
-    final iconSize = fontSize;
+    final iconSize = fontSize + 6;
 
     return Scaffold(
       appBar: AppBar(
@@ -23,11 +23,12 @@ class _HomeState extends State<Home> {
         title: Text(
           "Home",
           style: TextStyle(
-              color: Colors.white,
-              fontSize: fontSize,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 0.6,
-              fontStyle: FontStyle.italic),
+            color: Colors.white,
+            fontSize: fontSize + 4,
+            fontWeight: FontWeight.bold,
+            fontStyle: FontStyle.italic,
+            letterSpacing: 0.6,
+          ),
         ),
         actions: <Widget>[
           IconButton(
@@ -110,13 +111,14 @@ class _HomeState extends State<Home> {
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
                     child: Text(
-                      "Hi! I am Erkenner Here to Help You Recognize all type of traffic signals...",
+                      "Hi! I am Erkenner Here to Help You Recognize all type of traffic signals.",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: fontSize,
                         fontWeight: FontWeight.bold,
-                        wordSpacing: 6.0,
+                        wordSpacing: 3.0,
                         letterSpacing: 0.6,
+                        height: 1.3,
                         color: Colors.white,
                       ),
                     ),
@@ -125,14 +127,17 @@ class _HomeState extends State<Home> {
                 ),
               ],
             ),
-            FlatButton(
-              onPressed: () => Navigator.pushNamed(context, '/scan'),
-              padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
-              child: Text(
-                "Get Started",
-                style: TextStyle(fontSize: fontSize),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 24),
+              child: FlatButton(
+                onPressed: () => Navigator.pushNamed(context, '/scan'),
+                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+                child: Text(
+                  "Get Started",
+                  style: TextStyle(fontSize: fontSize),
+                ),
+                color: Colors.blueAccent,
               ),
-              color: Colors.blueAccent,
             ),
           ],
         ),

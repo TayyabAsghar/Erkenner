@@ -30,7 +30,9 @@ class _HistoryState extends State<History> {
         title: Text(
           "History",
           style: TextStyle(
-            fontSize: fontSize,
+            fontSize: fontSize + 4,
+            fontWeight: FontWeight.bold,
+            fontStyle: FontStyle.italic,
           ),
         ),
         actions: <Widget>[

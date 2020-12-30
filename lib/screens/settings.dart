@@ -4,8 +4,9 @@ import 'package:erkenner/models/theme.dart';
 
 class Settings extends StatelessWidget {
   final double fontSize;
-  final smallFonts = 14.0;
-  final mediumFonts = 16.0;
+  final smallFonts = 16.0;
+  // If you change mediumFonts value then you also have to change the value in main.dart default fontSize.
+  final mediumFonts = 18.0;
   final largeFonts = 22.0;
 
   Settings({@required this.fontSize});
@@ -45,7 +46,11 @@ class Settings extends StatelessWidget {
         ),
         title: Text(
           "Settings",
-          style: TextStyle(fontSize: fontSize),
+          style: TextStyle(
+            fontSize: fontSize + 4,
+            fontWeight: FontWeight.bold,
+            fontStyle: FontStyle.italic,
+          ),
         ),
         actions: <Widget>[
           IconButton(
@@ -75,10 +80,7 @@ class Settings extends StatelessWidget {
                   color: Colors.white),
             ),
             Padding(padding: EdgeInsets.symmetric(vertical: 8.0)),
-            Divider(
-              height: 5.0,
-              color: Colors.white,
-            ),
+            Divider(height: 5.0, color: Colors.white),
             Padding(padding: EdgeInsets.symmetric(vertical: 8.0)),
             Row(
               children: <Widget>[

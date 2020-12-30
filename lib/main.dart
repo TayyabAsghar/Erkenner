@@ -17,8 +17,10 @@ void main() async {
   Hive.init(appDocumentDirectory.path);
 
   final settings = await Hive.openBox('settings');
-  bool isLightTheme = settings.get('isLightTheme') ?? false;
+  final isLightTheme = settings.get('isLightTheme') ?? false;
   double fontSize = settings.get('fontSize');
+
+  if (fontSize == null) fontSize = 18.0; // Default fontSize for very 1st time.
 
   runApp(
     ChangeNotifierProvider(

@@ -82,7 +82,9 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
         title: Text(
           'Scan Images',
           style: TextStyle(
-            fontSize: fontSize,
+            fontSize: fontSize + 4,
+            fontWeight: FontWeight.bold,
+            fontStyle: FontStyle.italic,
           ),
         ),
       ),

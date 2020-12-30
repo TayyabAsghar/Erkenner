@@ -17,43 +17,49 @@ class _AboutState extends State<About> {
 
     return Scaffold(
       appBar: AppBar(
-          elevation: 0,
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-              size: 26,
-            ),
-            onPressed: () => Navigator.pop(context),
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: 26,
           ),
-          centerTitle: true,
-          title: Column(
-            children: <Widget>[
-              Align(
-                alignment: Alignment.center,
-                child: Container(
-                  child: Text(
-                    "About",
-                    style: TextStyle(fontSize: fontSize),
+          onPressed: () => Navigator.pop(context),
+        ),
+        centerTitle: true,
+        title: Column(
+          children: <Widget>[
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                child: Text(
+                  "About",
+                  style: TextStyle(
+                    fontSize: fontSize + 4,
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
                   ),
                 ),
               ),
-            ],
+            ),
+          ],
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.camera_alt,
+              color: Colors.white,
+              size: 26,
+            ),
+            alignment: Alignment.centerRight,
+            padding: EdgeInsets.only(right: 20),
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/scan');
+            },
           ),
-          actions: [
-            IconButton(
-                icon: Icon(
-                  Icons.camera_alt,
-                  color: Colors.white,
-                  size: 26,
-                ),
-                alignment: Alignment.centerRight,
-                padding: EdgeInsets.only(right: 20),
-                onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/scan');
-                }),
-          ]),
+        ],
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -93,7 +99,6 @@ class _AboutState extends State<About> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: fontSize,
-                      fontFamily: "Calibri",
                       wordSpacing: 6.0,
                       letterSpacing: 0.6,
                       color: Colors.white,
@@ -116,7 +121,6 @@ class _AboutState extends State<About> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: fontSize,
-                      fontFamily: "Calibri",
                       fontWeight: FontWeight.bold,
                       wordSpacing: 6.0,
                       letterSpacing: 0.6,
