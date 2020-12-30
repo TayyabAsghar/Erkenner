@@ -10,11 +10,11 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(
+    final fontSize = Provider.of<ThemeProvider>(
       context,
       listen: false,
-    );
-    final fontSize = themeProvider.fontSize;
+    ).fontSize;
+    final iconSize = fontSize;
 
     return Scaffold(
       appBar: AppBar(
@@ -53,26 +53,44 @@ class _HomeState extends State<Home> {
             padding: EdgeInsets.zero,
             children: <Widget>[
               ListTile(
-                leading: Icon(Icons.history),
-                title: Text('History'),
+                leading: Icon(
+                  Icons.history,
+                  size: iconSize,
+                ),
+                title: Text(
+                  'History',
+                  style: TextStyle(fontSize: fontSize),
+                ),
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.pop(context); // This will close the Drawer.
                   Navigator.pushNamed(context, '/history');
                 },
               ),
               ListTile(
-                leading: Icon(Icons.settings),
-                title: Text('Settings'),
+                leading: Icon(
+                  Icons.settings,
+                  size: iconSize,
+                ),
+                title: Text(
+                  'Settings',
+                  style: TextStyle(fontSize: fontSize),
+                ),
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.pop(context); // This will close the Drawer.
                   Navigator.pushNamed(context, '/settings');
                 },
               ),
               ListTile(
-                leading: Icon(Icons.supervised_user_circle),
-                title: Text('About us'),
+                leading: Icon(
+                  Icons.supervised_user_circle,
+                  size: iconSize,
+                ),
+                title: Text(
+                  'About us',
+                  style: TextStyle(fontSize: fontSize),
+                ),
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.pop(context); // This will close the Drawer.
                   Navigator.pushNamed(context, '/about');
                 },
               ),
@@ -108,7 +126,6 @@ class _HomeState extends State<Home> {
               ],
             ),
             FlatButton(
-              splashColor: Colors.red,
               onPressed: () => Navigator.pushNamed(context, '/scan'),
               padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
               child: Text(

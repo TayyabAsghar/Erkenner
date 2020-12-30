@@ -1,7 +1,6 @@
-// we use provider to manage the app state
+import 'package:hive/hive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hive/hive.dart';
 
 class ThemeProvider with ChangeNotifier {
   bool isLightTheme;
@@ -11,41 +10,37 @@ class ThemeProvider with ChangeNotifier {
 
   ThemeData light = ThemeData.light().copyWith(
     visualDensity: VisualDensity.adaptivePlatformDensity,
-    appBarTheme: AppBarTheme(
-      color: Color(0xff01A7E1),
-    ),
+    appBarTheme: AppBarTheme(color: Color(0xFF01A7E1)),
+    scaffoldBackgroundColor: Color(0xFF27679C),
+    canvasColor: Color(0xFFA7C5EB),
     brightness: Brightness.light,
-    scaffoldBackgroundColor: Color(0xff133b5c),
   );
 
   ThemeData dark = ThemeData.dark().copyWith(
     visualDensity: VisualDensity.adaptivePlatformDensity,
-    appBarTheme: AppBarTheme(
-      color: Color(0xff1d2d50),
-    ),
+    appBarTheme: AppBarTheme(color: Color(0xFF1D2D50)),
+    scaffoldBackgroundColor: Color(0xFF0E1B2B),
     brightness: Brightness.dark,
-    scaffoldBackgroundColor: Color(0xff0E1B2B), //0xff0e1b2b
   );
 
   ThemeData get getTheme {
-    // Setting the Status/Navigation Bar color for every time app is open.
-    applyStatusNavigationBarColor();
+    applyStatusNavigationBarColor(); // Setting the Status/Navigation Bar color for every-time app is open.
     return isLightTheme ? light : dark;
   }
 
-  // the code below is to manage the status bar color when the theme changes
+  // the code below is to manage the status & navigation bar color when the theme changes
   applyStatusNavigationBarColor() {
     if (isLightTheme)
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
+        statusBarColor: Color(0xFF27679C),
         statusBarBrightness: Brightness.light,
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Colors.transparent,
+        systemNavigationBarColor: Color(0xFFE7D9EA),
         systemNavigationBarIconBrightness: Brightness.dark,
       ));
     else
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
+        statusBarColor: Color(0xFF0E1B2B),
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: Brightness.light,
         systemNavigationBarColor: Colors.black,
@@ -54,20 +49,17 @@ class ThemeProvider with ChangeNotifier {
   }
 
   toggleThemeData() async {
-    final settings =
-        await Hive.openBox('settings'); // Storing the data on local device
-    settings.put('isLightTheme', !isLightTheme);
+    final settings = await Hive.openBox('settings');
+    settings.put('isLightTheme', !isLightTheme); // Storing data on local device
     isLightTheme = !isLightTheme;
     applyStatusNavigationBarColor();
     notifyListeners();
   }
 
   setFontSize(double _fontSize) async {
-    final settings =
-        await Hive.openBox('settings'); // Storing the data on local device
-    settings.put('fontSize', _fontSize);
+    final settings = await Hive.openBox('settings');
+    settings.put('fontSize', _fontSize); // Storing data on local device
     fontSize = _fontSize;
     notifyListeners();
   }
 }
-// Provider finished
