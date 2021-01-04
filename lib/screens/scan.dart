@@ -99,6 +99,7 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
                 'Failed',
                 style: TextStyle(
                   fontSize: fontSize,
+                  fontWeight: FontWeight.bold,
                   color: Colors.red[900],
                 ),
               ),
@@ -137,7 +138,7 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
 
 class DisplayPictureScreen extends StatelessWidget {
   final String imagePath;
-  DisplayPictureScreen({Key key, this.imagePath}) : super(key: key);
+  DisplayPictureScreen({Key key, @required this.imagePath}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

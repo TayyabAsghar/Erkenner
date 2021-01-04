@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   provider:
+  custom_switch: ^0.0.1
   hive: ^1.4.1+1
   camera:
   path:

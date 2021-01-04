@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:erkenner/models/theme.dart';
+import 'package:custom_switch/custom_switch.dart';
 
 class Settings extends StatelessWidget {
   final double fontSize;
@@ -18,9 +19,9 @@ class Settings extends StatelessWidget {
   }
 
   double getScale() {
-    if (fontSize == smallFonts) return 0.9;
-    if (fontSize == mediumFonts) return 1.1;
-    return 1.2;
+    if (fontSize == smallFonts) return 0.67;
+    if (fontSize == mediumFonts) return 0.75;
+    return 0.85;
   }
 
   @override
@@ -159,7 +160,8 @@ class Settings extends StatelessWidget {
                   child: Transform.scale(
                     scale:
                         getScale(), // Scale changes with the change of Fonts.
-                    child: Switch(
+                    child: CustomSwitch(
+                      activeColor: Colors.tealAccent[400],
                       value: themeState,
                       onChanged: (state) => themeProvider.toggleThemeData(),
                     ),
