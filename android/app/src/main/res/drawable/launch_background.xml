@@ -5,6 +5,6 @@
 
     <!-- You can insert your own image assets here -->
     <item>
-        <bitmap android:gravity="start" android:src="@mipmap/ic_launcher" />
+        <bitmap android:gravity="start" android:src="@drawable/ic_splash" />
     </item>
 </layer-list>
