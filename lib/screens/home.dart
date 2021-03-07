@@ -14,7 +14,7 @@ class _HomeState extends State<Home> {
       context,
       listen: false,
     ).fontSize;
-    final iconSize = fontSize + 6;
+    final iconSize = fontSize + 6; // IconSize also changes with fontSize
 
     return Scaffold(
       appBar: AppBar(
@@ -113,14 +113,18 @@ class _HomeState extends State<Home> {
                     child: Text(
                       "Hi! I am Erkenner Here to Help You Recognize all type of traffic signals.",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: fontSize,
-                        fontWeight: FontWeight.bold,
-                        wordSpacing: 3.0,
-                        letterSpacing: 0.6,
-                        height: 1.3,
-                        color: Colors.white,
-                      ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline1
+                          .apply(fontSizeDelta: fontSize),
+                      // style: TextStyle(
+                      //   fontSize: fontSize,
+                      //   fontWeight: FontWeight.bold,
+                      //   wordSpacing: 3.0,
+                      //   letterSpacing: 0.6,
+                      //   height: 1.3,
+                      //   color: Colors.white,
+                      // ),
                     ),
                     width: 300,
                   ),
@@ -128,17 +132,15 @@ class _HomeState extends State<Home> {
               ],
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 24),
-              child: FlatButton(
-                onPressed: () => Navigator.pushNamed(context, '/scan'),
-                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
-                child: Text(
-                  "Get Started",
-                  style: TextStyle(fontSize: fontSize),
-                ),
-                color: Colors.blueAccent,
-              ),
-            ),
+                padding: EdgeInsets.symmetric(vertical: 24),
+                child: RaisedButton(
+                  shape: StadiumBorder(),
+                  onPressed: () => Navigator.pushNamed(context, '/scan'),
+                  child: Text(
+                    "Get Started",
+                    style: TextStyle(fontSize: fontSize, fontFamily: 'Roboto'),
+                  ),
+                )),
           ],
         ),
       ),

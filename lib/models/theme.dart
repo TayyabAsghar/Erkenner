@@ -10,17 +10,133 @@ class ThemeProvider with ChangeNotifier {
 
   ThemeData light = ThemeData.light().copyWith(
     visualDensity: VisualDensity.adaptivePlatformDensity,
-    appBarTheme: AppBarTheme(color: Color(0xFF01A7E1)),
-    scaffoldBackgroundColor: Color(0xFF27679C),
-    canvasColor: Color(0xFFA7C5EB),
+    appBarTheme:
+        AppBarTheme(color: Colors.deepPurple[400]), // Still need to be set
+    scaffoldBackgroundColor: Colors.white,
+    //canvasColor: Color(0xFFA7C5EB),
     brightness: Brightness.light,
+    buttonTheme: ButtonThemeData(
+      minWidth: 100.0,
+      height: 50.0,
+      buttonColor: Colors.deepPurple[200],
+      textTheme: ButtonTextTheme.primary,
+    ),
+    textTheme: TextTheme(
+      headline1: TextStyle(
+        color: Colors.black,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.bold,
+      ),
+      headline2: TextStyle(
+        color: Colors.black,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.bold,
+      ),
+      headline3: TextStyle(
+        color: Colors.black,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.bold,
+      ),
+      headline4: TextStyle(
+        color: Colors.black,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.bold,
+      ),
+      headline5: TextStyle(
+        color: Colors.black,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.bold,
+      ),
+      headline6: TextStyle(
+        color: Colors.black,
+        fontFamily: 'Roboto',
+        fontStyle: FontStyle.italic,
+      ),
+      subtitle1: TextStyle(
+        color: Colors.black,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.bold,
+      ),
+      subtitle2: TextStyle(
+        color: Colors.black,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.bold,
+      ),
+      bodyText1: TextStyle(
+        color: Colors.black,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.bold,
+      ),
+      bodyText2: TextStyle(
+        color: Colors.black,
+        fontFamily: 'Roboto',
+      ),
+    ),
   );
 
   ThemeData dark = ThemeData.dark().copyWith(
     visualDensity: VisualDensity.adaptivePlatformDensity,
-    appBarTheme: AppBarTheme(color: Color(0xFF1D2D50)),
-    scaffoldBackgroundColor: Color(0xFF0E1B2B),
+    appBarTheme: AppBarTheme(color: Color(0xFF1F1F1F)),
+    scaffoldBackgroundColor: Color(0xFF121212),
     brightness: Brightness.dark,
+    canvasColor: Color(0xFF121212),
+    buttonTheme: ButtonThemeData(
+      minWidth: 100.0,
+      height: 50.0,
+      buttonColor: Colors.deepPurple[200],
+      textTheme: ButtonTextTheme.primary,
+    ),
+    textTheme: TextTheme(
+      headline1: TextStyle(
+        color: Colors.white,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.bold,
+      ),
+      headline2: TextStyle(
+        color: Colors.white,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.bold,
+      ),
+      headline3: TextStyle(
+        color: Colors.white,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.bold,
+      ),
+      headline4: TextStyle(
+        color: Colors.white,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.bold,
+      ),
+      headline5: TextStyle(
+        color: Colors.white,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.bold,
+      ),
+      headline6: TextStyle(
+        color: Colors.white,
+        fontFamily: 'Roboto',
+        fontStyle: FontStyle.italic,
+      ),
+      subtitle1: TextStyle(
+        color: Colors.white,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.bold,
+      ),
+      subtitle2: TextStyle(
+        color: Colors.white,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.bold,
+      ),
+      bodyText1: TextStyle(
+        color: Colors.white,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.bold,
+      ),
+      bodyText2: TextStyle(
+        color: Colors.white,
+        fontFamily: 'Roboto',
+      ),
+    ),
   );
 
   ThemeData get getTheme {
@@ -32,7 +148,7 @@ class ThemeProvider with ChangeNotifier {
   applyStatusNavigationBarColor() {
     if (isLightTheme)
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Color(0xFF27679C),
+        statusBarColor: Color(0xFF303F9F), //FF27679C
         statusBarBrightness: Brightness.light,
         statusBarIconBrightness: Brightness.dark,
         systemNavigationBarColor: Color(0xFFE7D9EA),
@@ -40,7 +156,7 @@ class ThemeProvider with ChangeNotifier {
       ));
     else
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Color(0xFF0E1B2B),
+        statusBarColor: Color(0xFF121212),
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: Brightness.light,
         systemNavigationBarColor: Colors.black,
