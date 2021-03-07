@@ -8,8 +8,6 @@ import 'package:erkenner/screens/about.dart';
 import 'package:erkenner/screens/history.dart';
 import 'package:erkenner/screens/settings.dart';
 import 'package:path_provider/path_provider.dart' as pathProvider;
-import 'package:camera/camera.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
