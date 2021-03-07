@@ -1,152 +1,219 @@
+// import 'dart:io';
+// import 'dart:async';
+// import 'package:camera/camera.dart';
+// import 'package:flutter/material.dart';
+// import 'package:provider/provider.dart';
+// import 'package:path/path.dart' show join;
+// import 'package:erkenner/models/theme.dart';
+// import 'package:path_provider/path_provider.dart';
+
+// class Scan extends StatefulWidget {
+//   @override
+//   _ScanState createState() => _ScanState();
+// }
+
+// class _ScanState extends State<Scan> {
+//   var firstCamera;
+
+//   _getCamera() async {
+//     WidgetsFlutterBinding.ensureInitialized();
+//     final cameras =
+//         await availableCameras(); // returns Future<List>(CameraDescription
+//     firstCamera = cameras.first; //Camera[0]
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     _getCamera();
+//     return Scaffold(
+//       body: TakePictureScreen(firstCamera: firstCamera),
+//     );
+//   }
+// }
+
+// class TakePictureScreen extends StatefulWidget {
+//   final CameraDescription firstCamera;
+
+//   TakePictureScreen({Key key, this.firstCamera}) : super(key: key);
+//   @override
+//   _TakePictureScreenState createState() => _TakePictureScreenState();
+// }
+
+// class _TakePictureScreenState extends State<TakePictureScreen> {
+//   CameraController _cameraController;
+//   Future<void> _initializeControllerFuture;
+
+//   @override
+//   initState() {
+//     super.initState();
+//     _cameraController = CameraController(
+//       widget.firstCamera,
+//       ResolutionPreset.veryHigh,
+//     );
+//     _initializeControllerFuture = _cameraController.initialize();
+//   }
+
+//   @override
+//   void dispose() {
+//     _cameraController
+//         .dispose(); // Dispose the controller when widget is disposed.
+//     super.dispose();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final fontSize = Provider.of<ThemeProvider>(
+//       context,
+//       listen: false,
+//     ).fontSize;
+
+//     return Scaffold(
+//       appBar: AppBar(
+//         elevation: 0,
+//         centerTitle: true,
+//         leading: IconButton(
+//           icon: Icon(
+//             Icons.arrow_back,
+//             color: Colors.white,
+//             size: 26,
+//           ),
+//           onPressed: () => Navigator.pop(context),
+//         ),
+//         title: Text(
+//           'Scan Images',
+//           style: TextStyle(
+//             fontSize: fontSize + 4,
+//             fontWeight: FontWeight.bold,
+//             fontStyle: FontStyle.italic,
+//           ),
+//         ),
+//       ),
+//       body: FutureBuilder<void>(
+//         future: _initializeControllerFuture,
+//         builder: (context, snapshot) {
+//           if (snapshot.connectionState == ConnectionState.done)
+//             return CameraPreview(_cameraController);
+//           else
+//             return Center(
+//               child: Text(
+//                 'Failed',
+//                 style: TextStyle(
+//                   fontSize: fontSize,
+//                   fontWeight: FontWeight.bold,
+//                   color: Colors.red[900],
+//                 ),
+//               ),
+//             );
+//         },
+//       ),
+//       floatingActionButton: FloatingActionButton(
+//         tooltip: 'Click',
+//         child: Icon(Icons.camera_alt),
+//         onPressed: () async {
+//           try {
+//             // Create a temp path to store images
+//             await _initializeControllerFuture;
+//             final path = join(
+//                 (await getTemporaryDirectory()).path, '${DateTime.now()}.png');
+
+//             // Use camera controller to take pictures
+//             await _cameraController.takePicture(); //TODO path
+
+//             // Creating new class to open pictures
+//             Navigator.push(
+//               context,
+//               MaterialPageRoute(
+//                 builder: (context) => DisplayPictureScreen(imagePath: path),
+//               ),
+//             );
+//           } catch (error) {
+//             debugPrint(error);
+//           }
+//         },
+//       ),
+//       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+//     );
+//   }
+// }
+
+// class DisplayPictureScreen extends StatelessWidget {
+//   final String imagePath;
+//   DisplayPictureScreen({Key key, @required this.imagePath}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text(imagePath),
+//       ),
+//       body: Image.file(File(imagePath)),
+//     );
+//   }
+// }
+
 import 'dart:io';
-import 'dart:async';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:path/path.dart' show join;
-import 'package:erkenner/models/theme.dart';
-import 'package:path_provider/path_provider.dart';
 
+// ignore: must_be_immutable
 class Scan extends StatefulWidget {
-  @override
-  _ScanState createState() => _ScanState();
-}
-
-class _ScanState extends State<Scan> {
-  var firstCamera;
-
-  _getCamera() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    final cameras =
-        await availableCameras(); // returns Future<List>(CameraDescription
-    firstCamera = cameras.first; //Camera[0]
-  }
+  List<CameraDescription> cameras;
+  Scan(this.cameras);
 
   @override
-  Widget build(BuildContext context) {
-    _getCamera();
-    return Scaffold(
-      body: TakePictureScreen(firstCamera: firstCamera),
-    );
+  CameraScreenState createState() {
+    return new CameraScreenState();
   }
 }
 
-class TakePictureScreen extends StatefulWidget {
-  final CameraDescription firstCamera;
-
-  TakePictureScreen({Key key, this.firstCamera}) : super(key: key);
-  @override
-  _TakePictureScreenState createState() => _TakePictureScreenState();
-}
-
-class _TakePictureScreenState extends State<TakePictureScreen> {
+class CameraScreenState extends State<Scan> {
   CameraController _cameraController;
   Future<void> _initializeControllerFuture;
 
   @override
-  initState() {
+  void initState() {
     super.initState();
-    _cameraController = CameraController(
-      widget.firstCamera,
-      ResolutionPreset.veryHigh,
-    );
+    _cameraController =
+        new CameraController(widget.cameras[0], ResolutionPreset.veryHigh);
+    _cameraController.initialize().then((_) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {});
+    });
     _initializeControllerFuture = _cameraController.initialize();
   }
 
   @override
   void dispose() {
-    _cameraController
-        .dispose(); // Dispose the controller when widget is disposed.
+    // TODO: implement dispose
+    _cameraController?.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final fontSize = Provider.of<ThemeProvider>(
-      context,
-      listen: false,
-    ).fontSize;
-
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        centerTitle: true,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-            size: 26,
-          ),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: Text(
-          'Scan Images',
-          style: TextStyle(
-            fontSize: fontSize + 4,
-            fontWeight: FontWeight.bold,
-            fontStyle: FontStyle.italic,
-          ),
-        ),
-      ),
-      body: FutureBuilder<void>(
-        future: _initializeControllerFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done)
-            return CameraPreview(_cameraController);
-          else
-            return Center(
-              child: Text(
-                'Failed',
-                style: TextStyle(
-                  fontSize: fontSize,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.red[900],
-                ),
-              ),
-            );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        tooltip: 'Click',
-        child: Icon(Icons.camera_alt),
-        onPressed: () async {
-          try {
-            // Create a temp path to store images
-            await _initializeControllerFuture;
-            final path = join(
-                (await getTemporaryDirectory()).path, '${DateTime.now()}.png');
-
-            // Use camera controller to take pictures
-            await _cameraController.takePicture(); //TODO path
-
-            // Creating new class to open pictures
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DisplayPictureScreen(imagePath: path),
-              ),
-            );
-          } catch (error) {
-            debugPrint(error);
-          }
-        },
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    if (!_cameraController.value.isInitialized) {
+      return new Container();
+    }
+    return new AspectRatio(
+      aspectRatio: _cameraController.value.aspectRatio,
+      child: new CameraPreview(_cameraController),
     );
   }
 }
 
-class DisplayPictureScreen extends StatelessWidget {
-  final String imagePath;
-  DisplayPictureScreen({Key key, @required this.imagePath}) : super(key: key);
+class DisplayPicture extends StatelessWidget {
+  final String path;
+  DisplayPicture(this.path);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(imagePath),
+        title: Text(path),
       ),
-      body: Image.file(File(imagePath)),
+      body: Image.file(File(path)),
     );
   }
 }

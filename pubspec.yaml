@@ -42,9 +42,10 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 flutter_icons:
-  android: "ic_launcher"
   ios: true
-  image_path: "assets/icon/icon.png"
+  android: true
+  image_path_ios: "assets/icon/ios.png"
+  image_path_android: "assets/icon/android.png"
 
 # The following section is specific to Flutter.
 flutter:

@@ -8,9 +8,14 @@ import 'package:erkenner/screens/about.dart';
 import 'package:erkenner/screens/history.dart';
 import 'package:erkenner/screens/settings.dart';
 import 'package:path_provider/path_provider.dart' as pathProvider;
+import 'package:camera/camera.dart';
 
-void main() async {
+List<CameraDescription> cameras;
+
+Future<Null> main() async {
+  //cameras = await availableCameras();
   WidgetsFlutterBinding.ensureInitialized();
+
   final appDocumentDirectory =
       await pathProvider.getApplicationDocumentsDirectory();
 
@@ -50,7 +55,7 @@ class _ErkennerState extends State<Erkenner> {
       initialRoute: '/home',
       routes: {
         '/home': (context) => Home(),
-        '/scan': (context) => Scan(),
+        '/scan': (context) => Scan(cameras),
         '/history': (context) => History(),
         '/settings': (context) => Settings(fontSize: themeProvider.fontSize),
         '/about': (context) => About(),
