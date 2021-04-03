@@ -21,57 +21,6 @@ class ThemeProvider with ChangeNotifier {
       buttonColor: Colors.deepPurple[200],
       textTheme: ButtonTextTheme.primary,
     ),
-    textTheme: TextTheme(
-      headline1: TextStyle(
-        color: Colors.black,
-        fontFamily: 'Roboto',
-        fontWeight: FontWeight.bold,
-      ),
-      headline2: TextStyle(
-        color: Colors.black,
-        fontFamily: 'Roboto',
-        fontWeight: FontWeight.bold,
-      ),
-      headline3: TextStyle(
-        color: Colors.black,
-        fontFamily: 'Roboto',
-        fontWeight: FontWeight.bold,
-      ),
-      headline4: TextStyle(
-        color: Colors.black,
-        fontFamily: 'Roboto',
-        fontWeight: FontWeight.bold,
-      ),
-      headline5: TextStyle(
-        color: Colors.black,
-        fontFamily: 'Roboto',
-        fontWeight: FontWeight.bold,
-      ),
-      headline6: TextStyle(
-        color: Colors.black,
-        fontFamily: 'Roboto',
-        fontStyle: FontStyle.italic,
-      ),
-      subtitle1: TextStyle(
-        color: Colors.black,
-        fontFamily: 'Roboto',
-        fontWeight: FontWeight.bold,
-      ),
-      subtitle2: TextStyle(
-        color: Colors.black,
-        fontFamily: 'Roboto',
-        fontWeight: FontWeight.bold,
-      ),
-      bodyText1: TextStyle(
-        color: Colors.black,
-        fontFamily: 'Roboto',
-        fontWeight: FontWeight.bold,
-      ),
-      bodyText2: TextStyle(
-        color: Colors.black,
-        fontFamily: 'Roboto',
-      ),
-    ),
   );
 
   ThemeData dark = ThemeData.dark().copyWith(
@@ -85,57 +34,6 @@ class ThemeProvider with ChangeNotifier {
       height: 50.0,
       buttonColor: Colors.deepPurple[200],
       textTheme: ButtonTextTheme.primary,
-    ),
-    textTheme: TextTheme(
-      headline1: TextStyle(
-        color: Colors.white,
-        fontFamily: 'Roboto',
-        fontWeight: FontWeight.bold,
-      ),
-      headline2: TextStyle(
-        color: Colors.white,
-        fontFamily: 'Roboto',
-        fontWeight: FontWeight.bold,
-      ),
-      headline3: TextStyle(
-        color: Colors.white,
-        fontFamily: 'Roboto',
-        fontWeight: FontWeight.bold,
-      ),
-      headline4: TextStyle(
-        color: Colors.white,
-        fontFamily: 'Roboto',
-        fontWeight: FontWeight.bold,
-      ),
-      headline5: TextStyle(
-        color: Colors.white,
-        fontFamily: 'Roboto',
-        fontWeight: FontWeight.bold,
-      ),
-      headline6: TextStyle(
-        color: Colors.white,
-        fontFamily: 'Roboto',
-        fontStyle: FontStyle.italic,
-      ),
-      subtitle1: TextStyle(
-        color: Colors.white,
-        fontFamily: 'Roboto',
-        fontWeight: FontWeight.bold,
-      ),
-      subtitle2: TextStyle(
-        color: Colors.white,
-        fontFamily: 'Roboto',
-        fontWeight: FontWeight.bold,
-      ),
-      bodyText1: TextStyle(
-        color: Colors.white,
-        fontFamily: 'Roboto',
-        fontWeight: FontWeight.bold,
-      ),
-      bodyText2: TextStyle(
-        color: Colors.white,
-        fontFamily: 'Roboto',
-      ),
     ),
   );
 

@@ -10,10 +10,12 @@ class About extends StatefulWidget {
 class _AboutState extends State<About> {
   @override
   Widget build(BuildContext context) {
-    final fontSize = Provider.of<ThemeProvider>(
+    final themeProvider = Provider.of<ThemeProvider>(
       context,
       listen: false,
-    ).fontSize;
+    );
+    final isLightTheme = themeProvider.isLightTheme;
+    final fontSize = themeProvider.fontSize;
 
     return Scaffold(
       appBar: AppBar(
@@ -76,10 +78,10 @@ class _AboutState extends State<About> {
                     style: TextStyle(
                       fontSize: fontSize,
                       fontWeight: FontWeight.bold,
-                      fontFamily: "Calibri",
                       wordSpacing: 6.0,
                       letterSpacing: 0.6,
-                      color: Colors.white,
+                      fontFamily: 'Roboto',
+                      color: isLightTheme ? Colors.black : Colors.white,
                     ),
                   ),
                   width: 300,
@@ -101,7 +103,8 @@ class _AboutState extends State<About> {
                       fontSize: fontSize,
                       wordSpacing: 6.0,
                       letterSpacing: 0.6,
-                      color: Colors.white,
+                      fontFamily: 'Roboto',
+                      color: isLightTheme ? Colors.black : Colors.white,
                     ),
                   ),
                   width: 300,
@@ -124,7 +127,8 @@ class _AboutState extends State<About> {
                       fontWeight: FontWeight.bold,
                       wordSpacing: 6.0,
                       letterSpacing: 0.6,
-                      color: Colors.white,
+                      fontFamily: 'Roboto',
+                      color: isLightTheme ? Colors.black : Colors.white,
                     ), // resume
                   ),
                   width: 300,

@@ -30,7 +30,7 @@ class Settings extends StatelessWidget {
       context,
       listen: false,
     );
-    final themeState = !themeProvider.isLightTheme;
+    final themeState = themeProvider.isLightTheme;
     final fontSize = themeProvider.fontSize;
 
     return Scaffold(
@@ -76,9 +76,11 @@ class Settings extends StatelessWidget {
             Text(
               "Choose Preferences",
               style: TextStyle(
-                  fontSize: fontSize,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
+                fontSize: fontSize,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Roboto',
+                color: themeState ? Colors.black : Colors.white,
+              ),
             ),
             Padding(padding: EdgeInsets.symmetric(vertical: 8.0)),
             Divider(height: 5.0, color: Colors.white),
@@ -91,7 +93,8 @@ class Settings extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: fontSize,
-                    color: Colors.white,
+                    fontFamily: 'Roboto',
+                    color: themeState ? Colors.black : Colors.white,
                   ),
                 ),
                 Padding(padding: EdgeInsets.symmetric(horizontal: 18.0)),
@@ -99,7 +102,8 @@ class Settings extends StatelessWidget {
                   'S',
                   style: TextStyle(
                     fontSize: smallFonts,
-                    color: Colors.white,
+                    fontFamily: 'Roboto',
+                    color: themeState ? Colors.black : Colors.white,
                   ),
                 ),
                 Transform.scale(
@@ -114,7 +118,8 @@ class Settings extends StatelessWidget {
                   'M',
                   style: TextStyle(
                     fontSize: mediumFonts,
-                    color: Colors.white,
+                    fontFamily: 'Roboto',
+                    color: themeState ? Colors.black : Colors.white,
                   ),
                 ),
                 Transform.scale(
@@ -129,7 +134,8 @@ class Settings extends StatelessWidget {
                   'L',
                   style: TextStyle(
                     fontSize: largeFonts,
-                    color: Colors.white,
+                    fontFamily: 'Roboto',
+                    color: themeState ? Colors.black : Colors.white,
                   ),
                 ),
                 Transform.scale(
@@ -152,7 +158,8 @@ class Settings extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: fontSize,
-                    color: Colors.white,
+                    fontFamily: 'Roboto',
+                    color: themeState ? Colors.black : Colors.white,
                   ),
                 ),
                 Padding(
@@ -162,7 +169,7 @@ class Settings extends StatelessWidget {
                         getScale(), // Scale changes with the change of Fonts.
                     child: CustomSwitch(
                       activeColor: Colors.tealAccent[400],
-                      value: themeState,
+                      value: !themeState,
                       onChanged: (state) => themeProvider.toggleThemeData(),
                     ),
                   ),
@@ -178,7 +185,8 @@ class Settings extends StatelessWidget {
                   style: TextStyle(
                     height: 1.43,
                     fontSize: fontSize,
-                    color: Colors.white,
+                    fontFamily: 'Roboto',
+                    color: themeState ? Colors.black : Colors.white,
                   ),
                 ),
               ),

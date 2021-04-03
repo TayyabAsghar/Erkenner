@@ -10,10 +10,12 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    final fontSize = Provider.of<ThemeProvider>(
+    final themeProvider = Provider.of<ThemeProvider>(
       context,
       listen: false,
-    ).fontSize;
+    );
+    final isLightTheme = themeProvider.isLightTheme;
+    final fontSize = themeProvider.fontSize;
     final iconSize = fontSize + 6; // IconSize also changes with fontSize
 
     return Scaffold(
@@ -44,7 +46,7 @@ class _HomeState extends State<Home> {
         ],
       ),
       drawer: Padding(
-        padding: const EdgeInsets.fromLTRB(0.0, 80.0, 130.0, 0.0),
+        padding: EdgeInsets.fromLTRB(0.0, 80.0, 130.0, 0.0),
         child: Drawer(
           // Add a ListView to the drawer. This ensures the user can scroll
           // through the options in the drawer if there isn't enough vertical
@@ -108,23 +110,20 @@ class _HomeState extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0),
                   child: Container(
                     child: Text(
                       "Hi! I am Erkenner Here to Help You Recognize all type of traffic signals.",
                       textAlign: TextAlign.center,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline1
-                          .apply(fontSizeDelta: fontSize),
-                      // style: TextStyle(
-                      //   fontSize: fontSize,
-                      //   fontWeight: FontWeight.bold,
-                      //   wordSpacing: 3.0,
-                      //   letterSpacing: 0.6,
-                      //   height: 1.3,
-                      //   color: Colors.white,
-                      // ),
+                      style: TextStyle(
+                        fontSize: fontSize,
+                        fontWeight: FontWeight.bold,
+                        wordSpacing: 3.0,
+                        letterSpacing: 0.6,
+                        height: 1.3,
+                        fontFamily: 'Roboto',
+                        color: isLightTheme ? Colors.black : Colors.white,
+                      ),
                     ),
                     width: 300,
                   ),
@@ -132,15 +131,20 @@ class _HomeState extends State<Home> {
               ],
             ),
             Padding(
-                padding: EdgeInsets.symmetric(vertical: 24),
-                child: RaisedButton(
-                  shape: StadiumBorder(),
-                  onPressed: () => Navigator.pushNamed(context, '/scan'),
-                  child: Text(
-                    "Get Started",
-                    style: TextStyle(fontSize: fontSize, fontFamily: 'Roboto'),
+              padding: EdgeInsets.symmetric(vertical: 24),
+              child: RaisedButton(
+                shape: StadiumBorder(),
+                onPressed: () => Navigator.pushNamed(context, '/scan'),
+                child: Text(
+                  "Get Started",
+                  style: TextStyle(
+                    fontSize: fontSize,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Roboto',
                   ),
-                )),
+                ),
+              ),
+            ),
           ],
         ),
       ),

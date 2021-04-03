@@ -10,10 +10,12 @@ class History extends StatefulWidget {
 class _HistoryState extends State<History> {
   @override
   Widget build(BuildContext context) {
-    final fontSize = Provider.of<ThemeProvider>(
+    final themeProvider = Provider.of<ThemeProvider>(
       context,
       listen: false,
-    ).fontSize;
+    );
+    final isLightTheme = themeProvider.isLightTheme;
+    final fontSize = themeProvider.fontSize;
 
     return Scaffold(
       appBar: AppBar(
