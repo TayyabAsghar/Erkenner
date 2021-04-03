@@ -53,7 +53,9 @@ class _ErkennerState extends State<Erkenner> {
         '/home': (context) => Home(),
         '/scan': (context) => Scan(),
         '/history': (context) => History(),
-        '/settings': (context) => Settings(fontSize: themeProvider.fontSize),
+        '/settings': (context) => Settings(
+            fontSize: themeProvider
+                .fontSize), // fontSize is sent as parameter to set the first radio selection
         '/about': (context) => About(),
       },
     );

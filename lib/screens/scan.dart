@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:erkenner/models/theme.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tflite/tflite.dart';
-import 'package:flutter/services.dart';
 
 // ignore: must_be_immutable
 class Scan extends StatefulWidget {
