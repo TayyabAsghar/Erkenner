@@ -1,94 +1,63 @@
+import 'package:hive/hive.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:erkenner/screens/home.dart';
+import 'package:erkenner/screens/scan.dart';
+import 'package:erkenner/models/theme.dart';
+import 'package:erkenner/screens/about.dart';
+import 'package:erkenner/screens/history.dart';
+import 'package:erkenner/screens/settings.dart';
+import 'package:path_provider/path_provider.dart' as pathProvider;
 
-void main() {
-  runApp(Erkenner());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final appDocumentDirectory =
+      await pathProvider.getApplicationDocumentsDirectory();
+
+  Hive.init(appDocumentDirectory.path);
+
+  final settings = await Hive.openBox('settings');
+  final isLightTheme = settings.get('isLightTheme') ?? false;
+  double fontSize = settings.get('fontSize');
+
+  if (fontSize == null) fontSize = 18.0; // Default fontSize for very 1st time.
+
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(
+        isLightTheme: isLightTheme,
+        fontSize: fontSize,
+      ),
+      child: Erkenner(),
+    ),
+  );
 }
 
-class Erkenner extends StatelessWidget {
+class Erkenner extends StatefulWidget {
+  @override
+  _ErkennerState createState() => _ErkennerState();
+}
+
+class _ErkennerState extends State<Erkenner> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: HomePage());
-  }
-}
+    final themeProvider = Provider.of<ThemeProvider>(context);
 
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xff0E1B2B),
-      appBar: AppBar(
-          centerTitle: true,
-          title: Text("Welcome!",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 0.6,
-                  fontStyle: FontStyle.italic)),
-          backgroundColor: Color(0xff01A7E1),
-          actions: [
-            IconButton(
-                icon: Icon(Icons.camera_alt_rounded),
-                color: Colors.white,
-                iconSize: 24,
-                alignment: Alignment.centerRight,
-                padding: EdgeInsets.only(right: 20),
-                onPressed: () {}),
-          ]),
-      drawer: Drawer(
-        child: Text('Hello World'),
-      ),
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: 50),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    child: Text(
-                      "Hi! I am Erkenner Here to Help You Recognize all type of traffic signals...",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        wordSpacing: 6.0,
-                        letterSpacing: 0.6,
-                        color: Colors.white,
-                      ),
-                    ),
-                    width: 300,
-                  ),
-                ),
-              ],
-            ),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: []),
-            FlatButton(
-              onPressed: () {},
-              padding: EdgeInsets.symmetric(
-                vertical: 15.0,
-                horizontal: 20.0,
-              ),
-              child: Text(
-                "Get Started",
-                style: TextStyle(
-                  fontSize: 20.0,
-                ),
-              ),
-              color: Colors.blueAccent,
-            ),
-          ],
-        ),
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: themeProvider.getTheme,
+      initialRoute: '/home',
+      routes: {
+        '/home': (context) => Home(),
+        '/scan': (context) => Scan(),
+        '/history': (context) => History(),
+        '/settings': (context) => Settings(
+            fontSize: themeProvider
+                .fontSize), // fontSize is sent as parameter to set the first radio selection
+        '/about': (context) => About(),
+      },
     );
   }
 }

@@ -1,68 +1,71 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:erkenner/models/theme.dart';
 
-void main() {
-  runApp(Erkenner());
+class About extends StatefulWidget {
+  @override
+  _AboutState createState() => _AboutState();
 }
 
-class Erkenner extends StatelessWidget {
-  // This widget is the root of your application.
+class _AboutState extends State<About> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: AboutPage()
+    final themeProvider = Provider.of<ThemeProvider>(
+      context,
+      listen: false,
     );
-  }
-}
+    final isLightTheme = themeProvider.isLightTheme;
+    final fontSize = themeProvider.fontSize;
 
-class AboutPage extends StatefulWidget {
-  @override
-  _AboutPageState createState() => _AboutPageState();
-}
-
-class _AboutPageState extends State<AboutPage> {
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff0E1B2B),
       appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-              size: 30,
-            ),
-            onPressed: () {
-              // TODO: On press
-            },
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: 26,
           ),
-          centerTitle: true,
-          title: Column(
-            children: <Widget>[
-              Align(
-                alignment: Alignment.center,
-                child: Container(
-                  child: Text("About"),
+          onPressed: () => Navigator.pop(context),
+        ),
+        centerTitle: true,
+        title: Column(
+          children: <Widget>[
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                child: Text(
+                  "About",
+                  style: TextStyle(
+                    fontSize: fontSize + 4,
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
+                  ),
                 ),
               ),
-            ],
+            ),
+          ],
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.camera_alt,
+              color: Colors.white,
+              size: 26,
+            ),
+            alignment: Alignment.centerRight,
+            padding: EdgeInsets.only(right: 20),
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/scan');
+            },
           ),
-          actions: [
-            IconButton(icon:  Icon(Icons.camera_alt),
-                color: Colors.white,
-                iconSize: 30,
-                alignment: Alignment.centerRight,
-                padding: EdgeInsets.only(right: 20),
-                onPressed: () {}),
-          ]
+        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
-              height: 50
-          ),
+          SizedBox(height: 50),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -73,12 +76,12 @@ class _AboutPageState extends State<AboutPage> {
                     "Hi! I am Erkenner",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: fontSize,
                       fontWeight: FontWeight.bold,
-                      fontFamily: "Calibri",
                       wordSpacing: 6.0,
                       letterSpacing: 0.6,
-                      color: Colors.white,
+                      fontFamily: 'Roboto',
+                      color: isLightTheme ? Colors.black : Colors.white,
                     ),
                   ),
                   width: 300,
@@ -90,17 +93,18 @@ class _AboutPageState extends State<AboutPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 0.0, left: 8.0, right: 8.0, bottom: 8.0),
+                padding: const EdgeInsets.only(
+                    top: 0.0, left: 8.0, right: 8.0, bottom: 8.0),
                 child: Container(
                   child: Text(
                     "Here to help you recognize all types of Traffic Signals.",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: "Calibri",
+                      fontSize: fontSize,
                       wordSpacing: 6.0,
                       letterSpacing: 0.6,
-                      color: Colors.white,
+                      fontFamily: 'Roboto',
+                      color: isLightTheme ? Colors.black : Colors.white,
                     ),
                   ),
                   width: 300,
@@ -108,9 +112,7 @@ class _AboutPageState extends State<AboutPage> {
               ),
             ],
           ),
-          SizedBox(
-              height: 20
-          ),
+          SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -121,12 +123,12 @@ class _AboutPageState extends State<AboutPage> {
                     "How it Works?",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 20,
-                      fontFamily: "Calibri",
+                      fontSize: fontSize,
                       fontWeight: FontWeight.bold,
                       wordSpacing: 6.0,
                       letterSpacing: 0.6,
-                      color: Colors.white,
+                      fontFamily: 'Roboto',
+                      color: isLightTheme ? Colors.black : Colors.white,
                     ), // resume
                   ),
                   width: 300,

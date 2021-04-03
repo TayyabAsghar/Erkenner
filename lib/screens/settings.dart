@@ -1,220 +1,198 @@
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
+import 'package:provider/provider.dart';
+import 'package:erkenner/models/theme.dart';
+import 'package:custom_switch/custom_switch.dart';
 
-void main() => runApp(Erkenner());
+class Settings extends StatelessWidget {
+  final double fontSize;
+  final smallFonts = 16.0;
+  // If you change mediumFonts value then you also have to change the value in main.dart default fontSize.
+  final mediumFonts = 18.0;
+  final largeFonts = 22.0;
 
-class Erkenner extends StatelessWidget {
+  Settings({@required this.fontSize});
+
+  int selectedRadio() {
+    if (fontSize == smallFonts) return 1;
+    if (fontSize == mediumFonts) return 2;
+    return 3;
+  }
+
+  double getScale() {
+    if (fontSize == smallFonts) return 0.67;
+    if (fontSize == mediumFonts) return 0.75;
+    return 0.85;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Settings',
-      home: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
+    final themeProvider = Provider.of<ThemeProvider>(
+      context,
+      listen: false,
+    );
+    final themeState = themeProvider.isLightTheme;
+    final fontSize = themeProvider.fontSize;
+
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        centerTitle: true,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: 26,
+          ),
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: Text(
+          "Settings",
+          style: TextStyle(
+            fontSize: fontSize + 4,
+            fontWeight: FontWeight.bold,
+            fontStyle: FontStyle.italic,
+          ),
+        ),
+        actions: <Widget>[
+          IconButton(
             icon: Icon(
-              Icons.arrow_back,
+              Icons.camera_alt,
               color: Colors.white,
-              size: 30,
+              size: 26,
             ),
+            alignment: Alignment.centerRight,
+            padding: EdgeInsets.only(right: 20),
             onPressed: () {
-              // TODO: On press
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/scan');
             },
           ),
-          title: Column(
-            children: <Widget>[
-              Align(
-                alignment: Alignment.center,
-                child: Container(
-                  child: Text("Settings"),
-                ),
-              ),
-            ],
-          ),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.camera_alt,
-                color: Colors.white,
-                size: 30,
-              ),
-              onPressed: () {
-                // TODO: On press
-              },
-            ),
-          ],
-          backgroundColor: HexColor("#01A7E1"),
-        ),
-        body: PreferenceSelection(),
-        backgroundColor: HexColor("#0E1B2B"),
-      ),
-    );
-  }
-}
-
-class PreferenceSelection extends StatefulWidget {
-  PreferenceSelection({Key key}) : super(key: key);
-
-  @override
-  _PreferenceSelection createState() => _PreferenceSelection();
-}
-
-class _PreferenceSelection extends State<PreferenceSelection> {
-  int selectedRadio;
-  @override
-  void initState() {
-    super.initState();
-    selectedRadio = 2;
-  }
-
-  setSelectedRadio(int val) {
-    setState(() {
-      selectedRadio = val;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 11.0),
-          ),
-          Text(
-            "Choose Preferences",
-            style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.white),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 8.0),
-          ),
-          Divider(height: 5.0, color: Colors.white),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-          ),
-          Row(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 8.0),
-              ),
-              Text(
-                'Font Size:',
-                style: new TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.0,
-                  color: Colors.white,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 8.0),
-              ),
-              Text(
-                'S',
-                style: TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.white,
-                ),
-              ),
-              Radio(
-                value: 1,
-                groupValue: selectedRadio,
-                onChanged: (val) {
-                  setSelectedRadio(val);
-                },
-              ),
-              Text(
-                'M',
-                style: TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.white,
-                ),
-              ),
-              Radio(
-                value: 2,
-                groupValue: selectedRadio,
-                onChanged: (val) {
-                  setSelectedRadio(val);
-                },
-              ),
-              Text(
-                'L',
-                style: TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.white,
-                ),
-              ),
-              Radio(
-                value: 3,
-                groupValue: selectedRadio,
-                onChanged: (val) {
-                  setSelectedRadio(val);
-                },
-              ),
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 18.0),
-              ),
-              Text(
-                'Dark Theme:',
-                style: new TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.0,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 80.0),
-          ),
-          Row(
-            children: <Widget>[
-              Text(
-                'We are working to add more',
-                style: new TextStyle(
-                  fontSize: 18.0,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-            mainAxisAlignment: MainAxisAlignment.center,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 1.7),
-          ),
-          Row(
-            children: <Widget>[
-              Text(
-                'setting features',
-                style: new TextStyle(
-                  fontSize: 18.0,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-            mainAxisAlignment: MainAxisAlignment.center,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 1.7),
-          ),
-          Row(
-            children: <Widget>[
-              Text(
-                'till then enjoy the experience.',
-                style: new TextStyle(
-                  fontSize: 18.0,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-            mainAxisAlignment: MainAxisAlignment.center,
-          ),
         ],
+      ),
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            Padding(padding: EdgeInsets.symmetric(vertical: 11.0)),
+            Text(
+              "Choose Preferences",
+              style: TextStyle(
+                fontSize: fontSize,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Roboto',
+                color: themeState ? Colors.black : Colors.white,
+              ),
+            ),
+            Padding(padding: EdgeInsets.symmetric(vertical: 8.0)),
+            Divider(height: 5.0, color: Colors.white),
+            Padding(padding: EdgeInsets.symmetric(vertical: 8.0)),
+            Row(
+              children: <Widget>[
+                Padding(padding: EdgeInsets.symmetric(horizontal: 18.0)),
+                Text(
+                  'Font Size:',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: fontSize,
+                    fontFamily: 'Roboto',
+                    color: themeState ? Colors.black : Colors.white,
+                  ),
+                ),
+                Padding(padding: EdgeInsets.symmetric(horizontal: 18.0)),
+                Text(
+                  'S',
+                  style: TextStyle(
+                    fontSize: smallFonts,
+                    fontFamily: 'Roboto',
+                    color: themeState ? Colors.black : Colors.white,
+                  ),
+                ),
+                Transform.scale(
+                  scale: 0.8,
+                  child: Radio(
+                    value: 1,
+                    groupValue: selectedRadio(),
+                    onChanged: (val) => themeProvider.setFontSize(smallFonts),
+                  ),
+                ),
+                Text(
+                  'M',
+                  style: TextStyle(
+                    fontSize: mediumFonts,
+                    fontFamily: 'Roboto',
+                    color: themeState ? Colors.black : Colors.white,
+                  ),
+                ),
+                Transform.scale(
+                  scale: 0.92,
+                  child: Radio(
+                    value: 2,
+                    groupValue: selectedRadio(),
+                    onChanged: (val) => themeProvider.setFontSize(mediumFonts),
+                  ),
+                ),
+                Text(
+                  'L',
+                  style: TextStyle(
+                    fontSize: largeFonts,
+                    fontFamily: 'Roboto',
+                    color: themeState ? Colors.black : Colors.white,
+                  ),
+                ),
+                Transform.scale(
+                  scale: 1.05,
+                  child: Radio(
+                    value: 3,
+                    groupValue: selectedRadio(),
+                    onChanged: (val) => themeProvider.setFontSize(largeFonts),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 18.0),
+                ),
+                Text(
+                  'Dark Theme:',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: fontSize,
+                    fontFamily: 'Roboto',
+                    color: themeState ? Colors.black : Colors.white,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Transform.scale(
+                    scale:
+                        getScale(), // Scale changes with the change of Fonts.
+                    child: CustomSwitch(
+                      activeColor: Colors.tealAccent[400],
+                      value: !themeState,
+                      onChanged: (state) => themeProvider.toggleThemeData(),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Expanded(
+              // This  box will cover all the area beneath the Dark Theme option.
+              child: Center(
+                child: Text(
+                  'We are working to add more\n setting features\n till then enjoy the experience.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    height: 1.43,
+                    fontSize: fontSize,
+                    fontFamily: 'Roboto',
+                    color: themeState ? Colors.black : Colors.white,
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
