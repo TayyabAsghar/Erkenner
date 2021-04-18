@@ -31,6 +31,7 @@ There some major and small ideas that are still needs to be implemented...
 - `Integration` - The app still needs to be integrated with the python code (which we have written) for detection and recognition. We could not complete this feature due to start of next semester.
 - `Working Demo` - Plan is once the integration is completed we will add a small video of working demo on the home screen.
 - `Update AboutUs` - Needs to update the screen of aboutUs through which users can reach us.
+- `SplashScreen` - Change the image on splash screen with the current logo.
 
 # ↓ Installation for ⚡️ Usage
 
@@ -40,7 +41,7 @@ There some major and small ideas that are still needs to be implemented...
 
 # ⚡️ Usage
 
-Using it very simple.
+Using it is very simple.
 
 - Install it
 - Open it
